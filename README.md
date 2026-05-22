@@ -14,4 +14,4 @@ Este proyecto implementa una Cloud Function en Google Cloud Platform (GCP) utili
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/tu-usuario/dys-cf-config-api-ml.git
+   git clone https://github.com/d-yanez/dys-cf-config-api-ml.git

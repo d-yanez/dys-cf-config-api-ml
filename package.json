@@ -1,28 +1,31 @@
 {
-    "name": "dys-cf-config-api-ml",
-    "version": "1.0.0",
-    "description": "Cloud Functions para obtener token de ML",
-    "main": "dist/main.js",
-    "scripts": {
-        "build": "tsc",
-        "start": "node dist/main.js",
-        "local": "functions-framework --target=app"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "axios": "^1.7.7",
-        "express": "^4.21.0",
-        "mongoose": "^8.6.3",
-        "url-search-params": "^1.1.0"
-    },
-    "devDependencies": {
-        "@google-cloud/functions-framework": "^3.4.2",
-        "@types/express": "^5.0.0",
-        "@types/node": "^22.7.2",
-        "dotenv": "^16.4.5",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.6.2"
-    }
+  "name": "dys-cf-config-api-ml",
+  "version": "1.0.0",
+  "description": "Cloud Functions para obtener token de ML",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "local": "functions-framework --target=app",
+    "deps:policy": "node -e \"const p=require('./package.json');const bad=[];for(const s of ['dependencies','devDependencies','optionalDependencies']){for(const [n,v] of Object.entries(p[s]||{})){if(v==='latest'||v==='*')bad.push(s+':'+n+'@'+v)}} if(bad.length){console.error('Blocked dependency specs\\n'+bad.join('\\n'));process.exit(1)} console.log('deps policy ok')\"",
+    "deps:install:ci": "npm ci --ignore-scripts",
+    "deps:policy:lockfile": "node -e \"const fs=require('fs');const f=fs.existsSync('pnpm-lock.yaml')?'pnpm-lock.yaml':(fs.existsSync('package-lock.json')?'package-lock.json':null); if(!f){console.log('no lockfile found');process.exit(0)} const t=fs.readFileSync(f,'utf8');const bad=[...t.matchAll(/https?:\\/\\/([^\\s'\\\"]+)/g)].map(m=>m[1]).filter(h=>!h.startsWith('registry.npmjs.org')); if(bad.length){console.error('Disallowed lockfile hosts:\\n'+[...new Set(bad)].join('\\n'));process.exit(1)} console.log('lockfile host policy ok')\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.21.0",
+    "mongoose": "^8.6.3",
+    "url-search-params": "^1.1.0"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.4.2",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.2",
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
 }
